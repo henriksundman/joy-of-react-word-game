@@ -8,9 +8,9 @@ function Guess({ guess }) {
 		<div className="guess-result">
 			<p className="guess">
 				{guess.text
-					? guess.text.split('').map((letter, index) => (
-							<span className="cell" key={index}>
-								{letter}
+					? guess.checkedAnswer.map((letter, index) => (
+							<span className={`cell ${letter.status}`} key={index}>
+								{letter.letter}
 							</span>
 					  ))
 					: cells.map((cell) => <span className="cell" key={cell}></span>)}
