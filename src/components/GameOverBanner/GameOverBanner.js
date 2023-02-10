@@ -1,7 +1,7 @@
 import React from 'react';
 
-function GameOverBanner({ didWin = false, numGuesses = 2, word = 'PENIS' }) {
-	const banner = didWin ? (
+function GameOverBanner({ didWin = false, numGuesses, word, restartGame }) {
+	let banner = didWin ? (
 		<div className="happy banner">
 			<p>
 				<strong>Congratulations!</strong> Got it in
@@ -17,6 +17,7 @@ function GameOverBanner({ didWin = false, numGuesses = 2, word = 'PENIS' }) {
 			<p>
 				Sorry, the correct answer is <strong>{word}</strong>.
 			</p>
+			<button onClick={restartGame}>Click here to play again</button>
 		</div>
 	);
 
