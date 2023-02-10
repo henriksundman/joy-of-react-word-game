@@ -11,6 +11,7 @@ function GameOverBanner({ didWin = false, numGuesses, word, restartGame }) {
 				</strong>
 				.
 			</p>
+			<button onClick={restartGame}>Click here to play again</button>
 		</div>
 	) : (
 		<div className="sad banner">
