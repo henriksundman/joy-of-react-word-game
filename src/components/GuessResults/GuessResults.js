@@ -12,11 +12,9 @@ function GuessResults({ guesses }) {
 
 	return (
 		<div className="guess-results">
-			<>
-				{paddedGuesses.map((guess, index) => (
-					<Guess key={index} guess={guess} />
-				))}
-			</>
+			{paddedGuesses.map((guess, index) => (
+				<Guess key={index} guess={guess} />
+			))}
 		</div>
 	);
 }
