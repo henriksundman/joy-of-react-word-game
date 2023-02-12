@@ -7,25 +7,18 @@ import GameOverBanner from '../GameOverBanner/GameOverBanner';
 import { sample } from '../../utils';
 import { WORDS } from '../../data';
 import { checkGuess } from '../../game-helpers';
-import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
-
-// // Pick a random word on every pageload.
-// const answer = sample(WORDS);
-// // To make debugging easier, we'll log the solution in the console.
-// console.info({ answer });
-
-function isCorrectAnswer(checkedAnswer) {
-	return checkedAnswer.every((letter) => letter.status === 'correct');
-}
-
-function noMoreGuesses(currentGuess) {
-	return currentGuess === NUM_OF_GUESSES_ALLOWED;
-}
+import Keyboard from '../Keyboard/Keyboard';
+import {
+	keyboardRowsObjs,
+	noMoreGuesses,
+	isCorrectAnswer,
+} from '../../game-helpers';
 
 function Game() {
 	const [answer, setAnswer] = useState(sample(WORDS));
 	const [guesses, setGuesses] = useState([]);
 	const [latestGuess, setLatestGuess] = useState({});
+	const [keyboardRows, setKeyboardRows] = useState(keyboardRowsObjs());
 
 	const isGameOver =
 		latestGuess.isCorrectAnswer || noMoreGuesses(guesses.length);
@@ -34,7 +27,10 @@ function Game() {
 		setAnswer(sample(WORDS));
 		setGuesses([]);
 		setLatestGuess([]);
+		setKeyboardRows(keyboardRowsObjs());
 	}
+
+	console.info({ answer });
 
 	function handleGuesses(guess) {
 		const checkedAnswer = checkGuess(guess, answer);
@@ -53,6 +49,7 @@ function Game() {
 		<>
 			<GuessResults guesses={guesses} />
 			<GuessInput handleGuesses={handleGuesses} disabled={isGameOver} />
+			<Keyboard guesses={guesses} keyboardRowsObjs={keyboardRows} />
 			{isGameOver && (
 				<GameOverBanner
 					didWin={latestGuess.isCorrectAnswer}
