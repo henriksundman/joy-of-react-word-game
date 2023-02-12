@@ -30,8 +30,6 @@ function Game() {
 		setKeyboardRows(keyboardRowsObjs());
 	}
 
-	console.info({ answer });
-
 	function handleGuesses(guess) {
 		const checkedAnswer = checkGuess(guess, answer);
 
